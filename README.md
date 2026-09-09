@@ -1,5 +1,12 @@
 # California Housing Price Prediction
 
+![XGBoost](https://img.shields.io/badge/model-XGBoost-EA6C00)
+![Cross-validated](https://img.shields.io/badge/validation-5--fold%20CV-blue)
+[![License: MIT](https://img.shields.io/badge/license-MIT-lightgrey)](LICENSE)
+
+> **Interactive scenario map (runs the model in your browser):**
+> [juleescourne.github.io/portfolio-data-analyst/#/housing](https://juleescourne.github.io/portfolio-data-analyst/#/housing)
+
 An end-to-end machine-learning case study for predicting median housing values in California using **data cleaning, geographic feature engineering and XGBoost regression**.
 
 The project focuses on turning a small tabular dataset into a richer modeling dataset through domain-driven features, validating model performance, and reducing the final feature set for better interpretability.
