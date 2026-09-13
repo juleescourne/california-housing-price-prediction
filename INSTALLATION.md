@@ -1,3 +1,7 @@
+> **Évaluation de référence :** `scripts/evaluate.py`, exécuté sur les données brutes.
+> Voir le [rapport](reports/evaluation.json) et le [README](README.md). Les notebooks
+> et résultats décrits ci-dessous concernent l’exploration historique.
+
 # Installation
 
 Temps nécessaire : **5 minutes**, hors téléchargement du jeu de données.
