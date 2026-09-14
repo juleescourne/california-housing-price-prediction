@@ -21,13 +21,22 @@ def evaluate(path, output):
     required = ['longitude', 'latitude', 'housing_median_age', 'total_rooms', 'total_bedrooms',
                 'population', 'households', 'median_income', 'ocean_proximity', 'median_house_value']
     if not set(required) <= set(df): raise ValueError('Missing California Housing columns')
-    df = df[required]
+    df = df[required].copy()
+    for column in [c for c in required if c != 'ocean_proximity']:
+        df[column] = pd.to_numeric(df[column], errors='raise')
+        if np.isinf(df[column]).any(): raise ValueError(f'Infinite values in {column}')
+    if df[['longitude', 'latitude', 'median_house_value']].isna().any().any():
+        raise ValueError('Coordinates and target must be complete')
+    if not df.longitude.between(-180, 180).all() or not df.latitude.between(-90, 90).all():
+        raise ValueError('Coordinates outside geographic bounds')
     X, y = df.drop(columns='median_house_value'), df.median_house_value
     groups = (np.floor(df.latitude).astype(str)+'_'+np.floor(df.longitude).astype(str)).to_numpy()
     trainval, test = next(GroupShuffleSplit(n_splits=1, test_size=.2, random_state=42).split(X, y, groups))
     a, b = next(GroupShuffleSplit(n_splits=1, test_size=.25, random_state=42).split(X.iloc[trainval], y.iloc[trainval], groups[trainval]))
     train, validation = trainval[a], trainval[b]
-    assert not (set(groups[train]) & set(groups[test]) or set(groups[validation]) & set(groups[test]))
+    partitions = [set(groups[index]) for index in [train, validation, test]]
+    if any(partitions[a] & partitions[b] for a, b in [(0, 1), (0, 2), (1, 2)]):
+        raise ValueError('Geographic groups overlap between partitions')
     numeric = X.select_dtypes(include='number').columns.tolist()
     def preprocessing():
         return ColumnTransformer([('numeric', SimpleImputer(strategy='median'), numeric),

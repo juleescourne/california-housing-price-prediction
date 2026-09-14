@@ -31,6 +31,16 @@ Source utilisée : [`housing.csv` du dépôt pédagogique d'Aurélien Géron](ht
 également disponible via le [dataset Kaggle historique](https://www.kaggle.com/datasets/camnugent/california-housing-prices).
 CSV non redistribué ; empreinte enregistrée dans le rapport.
 
+## Vérification automatisée
+
+```bash
+python -m unittest discover -s tests -v
+```
+
+La CI exécute le script sur un petit jeu synthétique : elle vérifie les contrats
+d’entrée et la cohérence du protocole, sans téléchargement Kaggle. Ces tests ne
+recalculent pas les scores du rapport sur les données publiques.
+
 ## Corrections méthodologiques
 
 - Neuf variables brutes fixées à l'avance, sans sélection sur le jeu complet.
