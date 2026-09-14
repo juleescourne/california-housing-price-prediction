@@ -20,6 +20,8 @@ sont comparées sur validation ; la profondeur 5 est retenue avant lecture du te
 
 ## Reproduire
 
+Python **3.12 ou supérieur** est nécessaire pour les versions figées dans `requirements-eval.txt`.
+
 ```bash
 python -m venv .venv
 source .venv/bin/activate

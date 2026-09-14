@@ -10,7 +10,7 @@ Temps nécessaire : **5 minutes**, hors téléchargement du jeu de données.
 
 | Outil | Version | Vérifier |
 | --- | --- | --- |
-| Python | 3.11 ou supérieur | `python --version` |
+| Python | 3.12 ou supérieur (évaluation de référence) | `python --version` |
 | Compte Kaggle | gratuit | pour télécharger le jeu de données |
 
 ---
